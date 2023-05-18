@@ -1,101 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foguetinho</title>
     <style>
-        body{
+        body {
             width: 100%;
             height: 100vh;
-            background-image: linear-gradient(0deg, rgb(226, 156, 156),rgb(149, 63, 63));
+            background-image: linear-gradient(0deg, rgb(226, 156, 156), rgb(149, 63, 63));
             overflow: hidden;
         }
-        .foguete{
+
+        .foguete {
             position: absolute;
             top: 600px;
             left: 750px;
 
         }
-        .lua{
+
+        .lua {
             position: absolute;
             bottom: -440px;
             left: 30%;
-            
+
         }
     </style>
 </head>
+
 <body>
- 
-   
+
+
     <script src="jquery-3.7.0.min.js"> </script>
 
     <script>
 
-    data = new Date()
-    tempo_inicial = data.getTime()
+        data = new Date()
+        tempo_inicial = data.getTime()
 
-    
-    document.onkeydown = Pega_Tecla;
 
-function Pega_Tecla(e) 
-{	
-    e = e || window.event;
+        document.onkeydown = Pega_Tecla;
 
-    tecla = e.keyCode;
-    console.log(tecla); // MOSTRA O CÓDIGO DA TECLA PRESSIONADA
+        function Pega_Tecla(e) {
+            e = e || window.event;
 
-    data = new Date()
-    tempo_inicial = data.getTime()
+            tecla = e.keyCode;
+            console.log(tecla); // MOSTRA O CÓDIGO DA TECLA PRESSIONADA
 
-    if(tempo_final - tempo_inicial > 1000)
-    {
-        tempo_inicial = tempo_final
-        if(tecla == 37)
-    {
-        x = x - 20
-    }
-    if(tecla == 39)
-    {
-        x = x + 20
-    }
+            data = new Date()
+            tempo_inicial = data.getTime()
 
-    }
-    
-}
+            if (tecla == 37) {
+                x = x - 20
+            }
+            if (tecla == 39) {
+                x = x + 20
+            }
 
-        temporizador = setTimeout(Subir,1000)
-        x= 600
-        y= 750
+        }
+
+        temporizador = setTimeout(Subir, 1000)
+        x = 600
+        y = 750
         TOPO = ""
         ESQUERDA = ""
-        function Subir()
-        
-        {
-            
-            $("#foguete").animate({top:TOPO},1000)
+        function Subir() {
+
+            $("#foguete").animate({ top: TOPO }, 1000)
             temporizador = null
-            temporizador = setInterval(Descer,1000)
+            temporizador = setInterval(Descer, 1000)
         }
-        function Descer()
-        {
+        function Descer() {
             y = y + 20
-            if(y>700)
-            {
+            if (y > 700) {
                 y = 700
             }
             TOPO = y + "px"
             ESQUERDA = x + "px"
-            $("#foguete").animate({left:ESQUERDA,top:TOPO},1000)
-            
+            $("#foguete").animate({ left: ESQUERDA, top: TOPO }, 1000)
+
         }
 
     </script>
-   
-<img src="lua.png" class="lua">
-<img id="foguete" src="foguete.gif" width="80px" class="foguete">
+
+    <img src="lua.png" class="lua">
+    <img id="foguete" src="foguete.gif" width="80px" class="foguete">
 
 
 </body>
+
 </html>
