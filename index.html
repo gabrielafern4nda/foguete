@@ -1,41 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foguetinho</title>
+    <title>fogs</title>
     <style>
-        body {
+        body
+        {
             width: 100%;
             height: 100vh;
-            background-image: linear-gradient(0deg, rgb(226, 156, 156), rgb(149, 63, 63));
+            background-image: linear-gradient(0deg,rgb(234, 130, 130),rgb(123, 13, 13));
             overflow: hidden;
         }
-
-        .foguete {
+        .foguete
+        {
             position: absolute;
-            top: 600px;
+            top: 700px;
             left: 750px;
-
+        }
+        .chão
+        {
+            position: fixed;
+            top: 680px;
+            left: 470px;
         }
 
-        .lua {
-            position: absolute;
-            bottom: -440px;
-            left: 30%;
-
+        button{
+            width: 200px;
+            height: 50px;
+            background-color: rgb(67, 205, 194);
+            color: rgb(0, 0, 0);
+            font-family:Arial, Helvetica, sans-serif;
+            cursor: pointer;
         }
+
     </style>
 </head>
-
 <body>
+    <img src="lua.png" class="chão">
+    <img id="foguete" src="foguete.gif" width="80px" class="foguete">
+
+    <audio id="audio1" controls autoplay>
+        <source src="contagem_regressiva.mp3" type="audio/mp3">
+        Seu navegador não suporta a reprodução de áudio.
+      </audio>
+      
+      <audio id="audio2" controls autoplay>
+        <source src="lancamento_foguete.mp3" type="audio/mp3">
+        Seu navegador não suporta a reprodução de áudio.
+      </audio>
+
+      <audio id="audio3" controls autoplay>
+        <source src="descer.mp3" type="audio/mp3">
+        Seu navegador não suporta a reprodução de áudio.
+      </audio>
+
+      <button onclick="playAudio()">Clique para reproduzir</button>
+    
+
+        
+
+</body>
+
 
 
     <script src="jquery-3.7.0.min.js"> </script>
 
     <script>
+
+function playAudio() {
+  var audio1 = document.getElementById('audio1');
+  var audio2 = document.getElementById('audio2');
+  var audio3 = document.getElementById('audio3');
+
+  audio1.play();
+
+  audio1.onended = function() {
+    audio2.play();
+  },20000
+  };
+
+  audio2.onended = function() {
+    audio3.play();
+  },20000;
+
+        
 
         data = new Date()
         tempo_inicial = data.getTime()
@@ -43,52 +93,58 @@
 
         document.onkeydown = Pega_Tecla;
 
-        function Pega_Tecla(e) {
-            e = e || window.event;
+        function Pega_Tecla(e) 
+        {	
+        e = e || window.event;
 
-            tecla = e.keyCode;
-            console.log(tecla); // MOSTRA O CÓDIGO DA TECLA PRESSIONADA
+        tecla = e.keyCode;
+        console.log(tecla); // MOSTRA O CÓDIGO DA TECLA PRESSIONADA
 
-            data = new Date()
-            tempo_inicial = data.getTime()
+        data = new Date()
+        tempo_final = data.getTime()
 
-            if (tecla == 37) {
-                x = x - 20
-            }
-            if (tecla == 39) {
-                x = x + 20
-            }
-
+        if(tempo_final - tempo_inicial > 1000)
+        {
+            tempo_inicial = tempo_final
+            
+            if(tecla == 37)
+        {
+            x = x - 20
+        }
+        if(tecla == 39)
+        {
+            x = x + 20
+        }
         }
 
-        temporizador = setTimeout(Subir, 1000)
-        x = 600
-        y = 750
+        
+        }
+
+        temporizador = setTimeout(Subir,20000)
+        x = 750
+        y = 10
         TOPO = ""
         ESQUERDA = ""
-        function Subir() {
-
-            $("#foguete").animate({ top: TOPO }, 1000)
+        function Subir()
+        {
+            TOPO = y + "px"
+            $("#foguete").animate({top:TOPO},20000)
             temporizador = null
-            temporizador = setInterval(Descer, 1000)
+            temporizador = setInterval(Descer,5000)
         }
-        function Descer() {
-            y = y + 20
-            if (y > 700) {
-                y = 700
+        function Descer()
+        {
+            y = y + 100
+            if(y>700)
+            {
+            y = 700
             }
             TOPO = y + "px"
             ESQUERDA = x + "px"
-            $("#foguete").animate({ left: ESQUERDA, top: TOPO }, 1000)
-
+            $("#foguete").animate({left:ESQUERDA,top:TOPO},1000)
+            
         }
 
     </script>
-
-    <img src="lua.png" class="lua">
-    <img id="foguete" src="foguete.gif" width="80px" class="foguete">
-
-
-</body>
-
+   
 </html>
